@@ -15,23 +15,19 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("----------InputSystem----------")]
-    private PlayerInputActions playerInputActions;
+    private PlayerInput playerInput;
 
     [SerializeField] private float movementSpeed;
     private Vector2 velocity;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.PlayerController.Move.performed += ctx => velocity =
+        playerInput = new PlayerInput();
+        playerInput.PlayerController.Move.performed += ctx => velocity =
                                       ctx.ReadValue<Vector2>();
-        playerInputActions.PlayerController.Move.canceled += ctx => velocity = Vector2.zero;
-    }
-
-    private void Update()
-    {
-        //velocity = playerInputActions.PlayerController.Move.ReadValue<Vector2>();
+        playerInput.PlayerController.Move.canceled += ctx => velocity = Vector2.zero;
     }
 
     private void FixedUpdate()
@@ -41,21 +37,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        EnableInput();
+        playerInput.PlayerController.Enable();
 
     }
     private void OnDisable()
     {
-        DisableInput();
-    }
-
-    private void DisableInput()
-    {
-        playerInputActions.PlayerController.Disable();
-    }
-    private void EnableInput()
-    {
-        playerInputActions.PlayerController.Enable();
+        playerInput.PlayerController.Disable();
     }
 
 }
