@@ -9,9 +9,6 @@ public class Health : MonoBehaviour
 
     [SerializeField] protected GameObject deadEffect;
 
-    protected bool isDead = false;
-
-
     public virtual void TakeDamage(float damage, Transform hitPos = null)
     {
         health = health - damage;
@@ -38,7 +35,6 @@ public class Health : MonoBehaviour
             Instantiate(deadEffect, transform.position, Quaternion.identity);
         }
         gameObject.SetActive(false);
-        isDead = true;
     }
 
 

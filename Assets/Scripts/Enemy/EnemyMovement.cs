@@ -8,8 +8,8 @@ public abstract class EnemyMovement : MonoBehaviour
 {
     protected Transform attackTarget;
 
-    [SerializeField] protected Rigidbody2D rb;
-    [SerializeField] protected BoxCollider2D collider2D;
+    [SerializeField] protected Rigidbody rb;
+    [SerializeField] protected CapsuleCollider collider;
     [SerializeField] protected LayerMask groundLayer;
 
     [SerializeField] protected Animator ani;
@@ -61,7 +61,7 @@ public abstract class EnemyMovement : MonoBehaviour
     public void PerformMovement()
     {
         //Debug.Log(velocity);
-        rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+        //rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
     }
 
     public virtual void SetTarget(Transform target)
@@ -93,7 +93,7 @@ public abstract class EnemyMovement : MonoBehaviour
     }
     public void ForceMovement(Vector2 offset)
     {
-        rb.position = rb.position + offset;
+        //rb.position = rb.position + offset;
     }
 
     public void MoveHorizontally(float vX)
@@ -120,7 +120,7 @@ public abstract class EnemyMovement : MonoBehaviour
             isJumping = false;
             return;
         }
-        RaycastHit2D raycastHit = Physics2D.BoxCast(collider2D.bounds.center, collider2D.bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(GetComponent<Collider2D>().bounds.center, GetComponent<Collider2D>().bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
         if(raycastHit.collider)
         {
             velocity.y = 0;

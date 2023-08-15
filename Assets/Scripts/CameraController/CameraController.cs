@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.iOS;
 
 public class CameraController : MonoBehaviour
 {
@@ -18,13 +19,15 @@ public class CameraController : MonoBehaviour
 
         if (Physics.Raycast(mouseRay, out RaycastHit hitInfo, float.MaxValue, mouseCollLayer))
         {
-            Vector3 mousePos = hitInfo.point;
-            Vector3 targerPos = player.position + mousePos;
+            Vector3 targetDireciton =  - player.position + hitInfo.point;
 
-            targerPos.x = Mathf.Clamp(targerPos.x, -threshold + player.position.x, threshold + player.position.x);
-            targerPos.z = Mathf.Clamp(targerPos.z, -threshold + player.position.z, threshold + player.position.z);
+            Vector3 direction =( -player.position + hitInfo.point).normalized;
 
-            this.transform.position = targerPos;
+            transform.position =  threshold * direction + player.position;
+
+
         }
     }
+
+
 }

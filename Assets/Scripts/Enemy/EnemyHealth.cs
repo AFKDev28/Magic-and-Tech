@@ -18,14 +18,4 @@ public class EnemyHealth : Health
     {
         health = stats.maxHealth;
     }
-
-
-    public override void TakeDamage(float damage, Transform hitPos = null)
-    {
-        health = health - damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
 }
