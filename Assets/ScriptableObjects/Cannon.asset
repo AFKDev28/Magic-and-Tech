@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8522566d2f31e09418807a5e1eec724d, type: 3}
+  m_Name: Cannon
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4582537237666890001, guid: 68c85baf34fa5ba4384228b3306a8cdc,
+    type: 3}
+  weaponPrefab: {fileID: 6042604094228517082, guid: c0a017b407b7d0d4a800bca51a2f54b2,
+    type: 3}
+  cooldownTime: 0.3

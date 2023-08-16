@@ -3,37 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class CannonGun : IWeapon
-{
+//public class CannonGun : IWeapon
+//{
 
-    [SerializeField] private BulletController bulletPrefab;
-    private IObjectPool<BulletController> bulletPool;
+//    [SerializeField] private ProjectileController bulletPrefab;
+//    private IObjectPool<ProjectileController> bulletPool;
 
-    private void Awake()
-    {
-        bulletPool = new ObjectPool<BulletController>(() =>
-        {
-            BulletController bullet = Instantiate(bulletPrefab);
-            bullet.InIt(KillObjectInPool);
+//    private void Awake()
+//    {
+//        bulletPool = new ObjectPool<ProjectileController>(() =>
+//        {
+//            ProjectileController bullet = Instantiate(bulletPrefab);
+//            bullet.InIt(KillObjectInPool);
 
-            return bullet;
-        }
-    , bullet => bullet.gameObject.SetActive(true)
-    , bullet => bullet.gameObject.SetActive(false)
-    , bullet => Destroy(bullet.gameObject)
-    , false, 20);
-    }
+//            return bullet;
+//        }
+//    , bullet => bullet.gameObject.SetActive(true)
+//    , bullet => bullet.gameObject.SetActive(false)
+//    , bullet => Destroy(bullet.gameObject)
+//    , false, 20);
+//    }
 
-    private void KillObjectInPool(BulletController bullet)
-    {
-        bulletPool.Release(bullet);
-    }
+//    private void KillObjectInPool(ProjectileController bullet)
+//    {
+//        bulletPool.Release(bullet);
+//    }
 
-    public override void ExcuteAttack()
-    {
-        BulletController bullet = bulletPool.Get();
+//    public  void ExcuteAttack()
+//    {
+//        //ProjectileController bullet = bulletPool.Get();
 
-        bullet.transform.forward = transform.forward;
-        bullet.transform.position = transform.position;
-    }
-}
+//        //bullet.transform.forward = transform.forward;
+//        //bullet.transform.position = transform.position;
+//    }
+
+//    private void OnDestroy()
+//    {
+
+//    }
+//}
