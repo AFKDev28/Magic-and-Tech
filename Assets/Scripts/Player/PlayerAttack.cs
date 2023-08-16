@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void KillObjectInPool(ProjectileController bullet)
     {
-        if (bullet == weapon.projectilePrefab)
+        if (bullet.projectile.id == weapon.projectilePrefab.projectile.id)
         {
             bulletPool.Release(bullet);
         }

@@ -20,6 +20,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed;
     private Vector2 velocity;
 
+    [Header("---------- Dash ----------")]
+
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashTime;
+    [SerializeField] private float dashCD;
+    [SerializeField] private LayerMask hitMask;
+
+    private Vector2 dashVelocity;
+    private bool isDashing = false;
+    private bool canDash = true;
+
 
     private void Awake()
     {
@@ -35,13 +46,51 @@ public class PlayerMovement : MonoBehaviour
 
     public void ReadMovemntValue(InputAction.CallbackContext context)
     {
-        velocity = context.ReadValue<Vector2>();
+            velocity = context.ReadValue<Vector2>() * movementSpeed;
+    }
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (canDash)
+        {
+            dashVelocity = dashSpeed * (velocity != Vector2.zero ? velocity.normalized 
+                : new Vector2 (transform.forward.x , transform.forward.z).normalized);
+            StartCoroutine(DashCooldown());
+        }
+    }
+
+
+    private IEnumerator DashCooldown()
+    {
+        canDash = false;
+        isDashing = true;
+        yield return new WaitForSeconds(dashTime);
+        isDashing = false;
+        yield return new WaitForSeconds(dashCD);
+        canDash = true;
     }
 
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector3(velocity.x * movementSpeed, rb.velocity.y, velocity.y * movementSpeed);
+        if (isDashing)
+        {
+            rb.velocity = new Vector3(dashVelocity.x, rb.velocity.y, dashVelocity.y);
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position  , rb.velocity.normalized, out hit, rb.velocity.magnitude * Time.fixedDeltaTime , hitMask)) ;
+            {
+                if(hit.collider)
+                {
+                    transform.position = hit.point;
+                    dashVelocity = Vector2.zero;
+                }
+            }
+
+        }
+        else
+        {
+            rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.y);
+        }
         LookAtMouse();
     }
 

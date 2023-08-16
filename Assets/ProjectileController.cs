@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    [SerializeField] ProjectileStats projectile;
+    [SerializeField] public ProjectileStats projectile;
 
     protected Action<ProjectileController> _killAction;
 
