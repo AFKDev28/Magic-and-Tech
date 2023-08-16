@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     [SerializeField] public ProjectileStats projectile;
-
+    [SerializeField] private ParticleSystem hitEffect;  
     protected Action<ProjectileController> _killAction;
 
     public void InIt(Action<ProjectileController> killAction)
@@ -14,27 +14,32 @@ public class ProjectileController : MonoBehaviour
         _killAction = killAction;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * projectile.raycastLength);
-
-    }
-    private void Update()
+    private void FixedUpdate()
     {
         RaycastHit hit;
-        if( Physics.Raycast(transform.position - transform.forward * projectile.raycastLength, transform.forward, out hit,projectile.raycastLength, projectile.hitMask ));
+        if (Physics.Raycast(transform.position , transform.forward, out hit, projectile.movSpeed * Time.fixedDeltaTime , projectile.hitMask)) 
         {
-            if( hit.collider != null )
+            if (hit.collider != null)
             {
                 Debug.Log(hit);
-                _killAction(this);
+                //_killAction(this);
+                transform.position = hit.point;
+                hitEffect.Play();
+                DoDamage(hit);
             }
+        }
+        else 
+        {
+            transform.position += projectile.movSpeed * Time.fixedDeltaTime * transform.forward;
         }
     }
 
-    private void FixedUpdate()
+    protected void DoDamage(RaycastHit hit)
     {
-        transform.position += projectile.movSpeed * Time.deltaTime * transform.forward;
+        Health health;
+        if (hit.transform.TryGetComponent<Health>(out health))
+        {
+            health.TakeDamage(1);
+        }
     }
 }

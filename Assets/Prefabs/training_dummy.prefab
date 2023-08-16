@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 5360683131785772904}
   - component: {fileID: 5615497917579445399}
   - component: {fileID: 2059777111400557622}
+  - component: {fileID: 7186713385439676849}
   m_Layer: 0
   m_Name: training_dummy
   m_TagString: Untagged
@@ -174,6 +175,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7186713385439676849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697017240656324050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed1ed849f02a764f86b70345ea728d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: c997e11b4662e2e4facb80d220df42b2, type: 2}
+  deadEffect: {fileID: 0}
 --- !u!1 &6774080502169825540
 GameObject:
   m_ObjectHideFlags: 0

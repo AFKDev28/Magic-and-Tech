@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    protected EnemyStats stats;
-    protected float health;
+    [SerializeField]  protected HealthStats stats;
+    protected int health;
 
     [SerializeField] protected GameObject deadEffect;
 
-    public virtual void TakeDamage(float damage, Transform hitPos = null)
+    private void Start()
+    {
+        health = stats.maxHealth;
+    }
+    public virtual void TakeDamage(int damage)
     {
         health = health - damage;
+        Debug.Log(health);
         if(health <= 0)
         {
             Die();
         }
     }
 
-    public float MaxHealth
+    public int MaxHealth
     {
         get { return stats.maxHealth; }
     }
 
-    public float CurentHealth
+    public int CurentHealth
     {
         get { return health; }
     }

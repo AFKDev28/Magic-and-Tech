@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8288ca7b40f96449b38fa71d792298c, type: 3}
   m_Name: ExplosionProjectile
   m_EditorClassIdentifier: 
+  id: explo
   movSpeed: 10
-  raycastLength: 1
   hitMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 3072

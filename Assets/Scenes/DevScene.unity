@@ -4594,6 +4594,12 @@ MonoBehaviour:
   rb: {fileID: 1406317565}
   pointToLook: {fileID: 225209319}
   movementSpeed: 20
+  dashSpeed: 100
+  dashTime: 0.1
+  dashCD: 0.4
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &1406317568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4661,7 +4667,19 @@ MonoBehaviour:
     m_ActionId: 60d852b7-c0dc-49aa-832b-e7a5cb884b2b
     m_ActionName: PlayerController/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1406317567}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Dash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b4460c17-3bd2-4a4e-aca0-a138eb628760
     m_ActionName: PlayerController/Dash[/Keyboard/ctrl]
   - m_PersistentCalls:
@@ -5237,6 +5255,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 75.63423
       objectReference: {fileID: 0}
+    - target: {fileID: 1904762223958030522, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2016522298165503403, guid: 0331b169005eb1d469455efaa6b9024a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5252,10 +5275,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.640962
       objectReference: {fileID: 0}
+    - target: {fileID: 2217982354390685929, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246267861249761399, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4697017240656324050, guid: 0331b169005eb1d469455efaa6b9024a,
         type: 3}
       propertyPath: m_Name
       value: training_dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697017240656324050, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5282924383133029861, guid: 0331b169005eb1d469455efaa6b9024a,
         type: 3}
@@ -5332,6 +5370,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 89.98021
       objectReference: {fileID: 0}
+    - target: {fileID: 6774080502169825540, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973413696058740841, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077608692380533153, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206035749426561629, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533163476571990239, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8033125610158513919, guid: 0331b169005eb1d469455efaa6b9024a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5341,6 +5404,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 8.59299e-31
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500709513404734051, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8765436389459637649, guid: 0331b169005eb1d469455efaa6b9024a,
         type: 3}

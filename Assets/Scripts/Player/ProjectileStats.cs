@@ -10,6 +10,5 @@ public class ProjectileStats : ScriptableObject
 {
     public string id;
     public float movSpeed;
-    public float raycastLength;
     public LayerMask hitMask;
 }
