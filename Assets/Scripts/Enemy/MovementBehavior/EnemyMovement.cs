@@ -10,15 +10,26 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private Transform transform;
 
-    private bool canMove = true;
+    private bool isStopped = false;
+
     private void FixedUpdate()
     {
-        if (canMove)
+        if (!isStopped)
         {
             behavior.Move(agent, transform.position, desPosition.position);
         }
     }
 
-    public void SetCanMove(bool canMove) => this.canMove = canMove;
-
+    public void SetCanMove(bool isStop)
+    {
+        isStopped = isStop;
+        if (isStop)
+        {
+            agent.enabled = false;           
+        }
+        else
+        {
+            agent.enabled = true;
+        }
+    }
 }

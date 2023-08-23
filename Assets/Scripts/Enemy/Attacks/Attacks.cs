@@ -6,17 +6,18 @@ public class Attacks : MonoBehaviour
 {
     private List<AttackBase> attacks;
 
-    [SerializeField]  private Animator animator;
+    [SerializeField] private Animator animator;
     [SerializeField] private EnemyMovement movBeh;
 
     [SerializeField] private Transform attackTarget;
+
     private AttackBase currentAttack;
-    
     private bool isAttacking;
 
-    private void OnEnable()
+    private void Start()
     {
         GetListAttacks();
+        isAttacking = false;
     }
 
     public void GetListAttacks()
@@ -40,7 +41,7 @@ public class Attacks : MonoBehaviour
 
         if (availableAttacks.Count > 0)
         {
-            return availableAttacks[UnityEngine.Random.Range(0, availableAttacks.Count - 1)];
+            return availableAttacks[UnityEngine.Random.Range(0, availableAttacks.Count)];
         }
         else
             return null;
@@ -48,34 +49,26 @@ public class Attacks : MonoBehaviour
 
     void Attack()
     {
-        AttackBase attack = AttackToUse();
-        if ( ! AttackToUse())
+        // Get random available attacks
+        currentAttack = AttackToUse();
+
+        if (!currentAttack)
             return;
-        currentAttack = attack;
-   
-        StartCoroutine(WaitForAttack(currentAttack.attackDuration));
-
-        if (!currentAttack.hasAni)
-            currentAttack.ExcuteAttack(attackTarget);
-        currentAttack.StartCooldown();
-        //animator.SetTrigger(currentAttack.aniTrigger);
-        //Debug.Log(currentAttack.aniTrigger);
+        else
+            StartCoroutine(DoTheAttack());
     }
-
-    public void AniTriggerAttack()
+  
+    private void FixedUpdate()
     {
-        currentAttack.ExcuteAttack(attackTarget);
-    }
-
-    private void Update()
-    {
-        if(!attackTarget)
+        if (!attackTarget)
             return;
 
         if (isAttacking)
-            return;
-
-        Attack();
+        {
+            currentAttack.OnExecutingAttack(attackTarget);
+        }
+        else
+            Attack();
     }
 
     public virtual void SetTarget(Transform target)
@@ -83,19 +76,30 @@ public class Attacks : MonoBehaviour
         attackTarget = target;
     }
 
-    private IEnumerator WaitForAttack(float delay)
+    private IEnumerator DoTheAttack()
     {
+        //Begin AttackTrigger
         isAttacking = true;
-        if(currentAttack.stopMovBeh)
-            movBeh.SetCanMove(false);
-        yield return new WaitForSeconds(delay);
-        if (currentAttack.isHasEventFinishAttack)
-        {
-            currentAttack.ExcuteAttack(attackTarget);
-        }
-        if (currentAttack.stopMovBeh)
-            movBeh.SetCanMove(true);
 
+        if(currentAttack.stopMovBeh)
+            movBeh.SetCanMove(true);
+        currentAttack.StartAttack(attackTarget);
+
+        if (currentAttack.hasAni)
+            animator.SetTrigger(currentAttack.aniTrigger);
+        Debug.Log(Time.time);
+        yield return new WaitForSeconds(currentAttack.attackDuration);
+        Debug.Log(Time.time);
+
+        //End AttackTrigger
+        currentAttack.EndAttack(attackTarget);
+        if (currentAttack.stopMovBeh)
+            movBeh.SetCanMove(false);
         isAttacking = false;
+    }
+
+    public void AniTriggerAttack()
+    {
+        currentAttack.ChangeAttackState();
     }
 }
