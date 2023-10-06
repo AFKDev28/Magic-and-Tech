@@ -17,6 +17,8 @@ public abstract class AttackBase : MonoBehaviour
 
     [SerializeField] public bool stopMovBeh = false;
 
+    protected int attackState;
+
     public Color gizmosColor;
 
     public virtual bool CanExcuteAttack(Vector3 targetPosi)
@@ -45,12 +47,15 @@ public abstract class AttackBase : MonoBehaviour
         return false;
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = gizmosColor;
-    //    Gizmos.DrawWireSphere(transform.position, minRange);
-    //    Gizmos.DrawWireSphere(transform.position, maxRange);
-    //}
+    private void OnDrawGizmos()
+    {
+        if (haveRange)
+        {
+            Gizmos.color = gizmosColor;
+            Gizmos.DrawSphere(transform.position, minRange);
+            Gizmos.DrawSphere(transform.position, maxRange);
+        }
+    }
 
     public abstract void OnExecutingAttack(Transform targetPosi);
     public abstract void StartAttack(Transform targetPosi);
@@ -58,6 +63,7 @@ public abstract class AttackBase : MonoBehaviour
 
     public virtual void ChangeAttackState()
     {
+        attackState++;
     }
    
 
